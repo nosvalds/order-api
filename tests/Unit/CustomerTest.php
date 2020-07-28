@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\Customer;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -18,7 +19,7 @@ class CustomerTest extends TestCase
                 "danger" => "Aaaargh!",
             ]);
             // first_name should be set, as it's in $fillable
-            $this->assertSame("Bilblo", $customer->first_name);
+            $this->assertSame("Bilbo", $customer->first_name);
 
             // last_name should be set, as it's in $fillable
             $this->assertSame("Baggins", $customer->last_name);
