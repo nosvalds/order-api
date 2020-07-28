@@ -78,6 +78,7 @@ Use the same request format as `POST /order`.
 - first_name - str
 - last_name - str
 - email - str
+- timestamps - time
 
 ### Orders
 #### Columns
