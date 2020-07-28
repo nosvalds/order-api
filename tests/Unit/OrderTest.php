@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use App\Order;
+use App\Customer;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -17,6 +18,7 @@ class OrderTest extends TestCase
     public function testFillable()
     {
         $order = new Order([
+            "customer_id" => 2,
             "delivery_postcode" => "BS1 5DP",
             "order_description" => "2 barrels of wine",
             "price" => 1.99,
@@ -31,6 +33,9 @@ class OrderTest extends TestCase
 
         // price should be set, as it's in $fillable
         $this->assertSame(1.99, $order->price);
+        
+        // customerID should be set, as it's in $fillable
+        $this->assertSame(2, $order->customer_id);
 
         // danger shouldn't be set, as it's not in $fillable
         $this->assertSame(null, $order->danger);
@@ -38,7 +43,15 @@ class OrderTest extends TestCase
 
     public function testOrderDatabase()
     {
+        // create a customer in the DB
+        Customer::create([
+            "first_name" => "Bilbo",
+            "last_name" => "Baggins",
+            "email" => "email@fun.com",
+        ]);
+       
         Order::create([
+            "customer_id" => Customer::all()->first()->id, // associate customer in DB with order
             "delivery_postcode" => "BS1 5DP",
             "order_description" => "2 barrels of wine",
             "price" => 1.99,
@@ -52,5 +65,8 @@ class OrderTest extends TestCase
 
         // check the price matches
         $this->assertSame(1.99, $orderFromDB->price);
+
+        // check the customer id matches
+        $this->assertSame(Customer::all()->first()->id, $orderFromDB->customer_id);
     }
 }
