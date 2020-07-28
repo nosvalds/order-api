@@ -49,9 +49,10 @@ class OrderTest extends TestCase
             "last_name" => "Baggins",
             "email" => "email@fun.com",
         ]);
-       
+        $customerId = Customer::all()->first()->id;
+
         Order::create([
-            "customer_id" => Customer::all()->first()->id, // associate customer in DB with order
+            "customer_id" => $customerId, // associate customer in DB with order
             "delivery_postcode" => "BS1 5DP",
             "order_description" => "2 barrels of wine",
             "price" => 1.99,
@@ -67,6 +68,6 @@ class OrderTest extends TestCase
         $this->assertSame(1.99, $orderFromDB->price);
 
         // check the customer id matches
-        $this->assertSame(Customer::all()->first()->id, $orderFromDB->customer_id);
+        $this->assertSame($customerId, $orderFromDB->customer_id);
     }
 }
