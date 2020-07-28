@@ -49,7 +49,8 @@ Will create a new order in the database
 Will return an order with the given `id`.
  
 ```json
-{	"id": 1,
+{	
+    "id": 1,
     "customer": {
         "first_name": "Bilbo", 
         "last_name" : "Baggins", 
