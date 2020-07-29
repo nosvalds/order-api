@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Customer;
 use App\Order;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\API\OrderResource;
 use Illuminate\Http\Request;
 
 class Orders extends Controller
@@ -27,20 +28,17 @@ class Orders extends Controller
      */
     public function store(Request $request)
     {
-    
         // get the request data
         $customer_data = $request->only('customer');
-        $order_data = collect($request->only('delivery_postcode', 'order_description','price'));
+        $order_data = $request->only('delivery_postcode', 'order_description','price');
         
         // create a new customer
         $customer = Customer::create($customer_data['customer']);
 
-        $order_data->put('customer_id', $customer->id);
-        
-        // create the order
-        $order = Order::create($order_data->all());
+        // create the order associated with the customer
+        $order = $customer->orders()->create($order_data);
 
-        return $order;
+        return new OrderResource($order);
     }
 
     /**
