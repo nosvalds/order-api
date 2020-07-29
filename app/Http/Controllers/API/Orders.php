@@ -54,9 +54,9 @@ class Orders extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Order $order)
     {
-        //
+        return new OrderResource($order);
     }
 
     /**
@@ -66,9 +66,16 @@ class Orders extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Order $order)
     {
-        //
+        // get order data
+        $order_data = $request->only('delivery_postcode', 'order_description','price');
+
+        // save data
+        $order->fill($order_data)->save();
+
+        // return
+        return new OrderResource($order);
     }
 
     /**

@@ -24,7 +24,7 @@ Route::group(["prefix" => "/orders"], function () {
     Route::post('/','API\Orders@store');
     
     // PUT /orders/:id - update an order
-    Route::put('/{owner}','API\Orders@update');
+    Route::put('/{order}','API\Orders@update');
     
     // GET /orders/:id - return a single order information
     Route::get('/{order}','API\Orders@show');
