@@ -90,8 +90,9 @@ Use the same request format as `POST /order`.
 
 
 ### Next steps
-- Update store controller to use elloqent to associate order/customer rather than using the ID
-- Create Response class to format the reponse correctly, tests for this as well
+- [x] Update store controller to use elloqent to associate order/customer rather than using the ID
+- [x] Create Response class to format the reponse correctly, tests for this as well
+- [ ] Check for existing customer and don't create duplicate if one already exists
 - PUT route
 - GET route
 

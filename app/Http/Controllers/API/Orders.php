@@ -31,9 +31,16 @@ class Orders extends Controller
         // get the request data
         $customer_data = $request->only('customer');
         $order_data = $request->only('delivery_postcode', 'order_description','price');
-        
-        // create a new customer
-        $customer = Customer::create($customer_data['customer']);
+    
+        // check if there is already a customer in the database
+        $existing_customer = Customer::where('email', $customer_data['customer']['email']);
+        if ($existing_customer->count() === 1) {
+            // use existing customer if it's already there
+            $customer = $existing_customer;
+        } else {
+            // create a new customer if there is no customer already in the DB
+            $customer = Customer::create($customer_data['customer']);
+        }
 
         // create the order associated with the customer
         $order = $customer->orders()->create($order_data);
