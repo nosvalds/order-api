@@ -10,6 +10,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class OrderTest extends TestCase
 {
     use RefreshDatabase;
+
     /**
      * A basic unit test example.
      *
@@ -49,6 +50,7 @@ class OrderTest extends TestCase
             "last_name" => "Baggins",
             "email" => "email@fun.com",
         ]);
+
         $customerId = Customer::all()->first()->id;
 
         Order::create([
@@ -69,5 +71,30 @@ class OrderTest extends TestCase
 
         // check the customer id matches
         $this->assertSame($customerId, $orderFromDB->customer_id);
+    }
+
+    public function testCustomerRelationship()
+    {
+        // create a customer in the DB
+        Customer::create([
+            "first_name" => "Bilbo",
+            "last_name" => "Baggins",
+            "email" => "email@fun.com",
+        ]);
+
+        $customerId = Customer::all()->first()->id;
+
+        Order::create([
+            "customer_id" => $customerId, // associate customer in DB with order
+            "delivery_postcode" => "BS1 5DP",
+            "order_description" => "2 barrels of wine",
+            "price" => 1.99,
+        ]);
+
+        // test use the Order to Customer relationship
+        $customerDBId = Order::all()->first()->customer->id;
+
+        // check the customer id matches
+        $this->assertSame($customerId, $customerDBId);
     }
 }

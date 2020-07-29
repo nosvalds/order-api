@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use App\Customer;
+use App\Order;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -44,5 +45,29 @@ class CustomerTest extends TestCase
 
         // check the titles match
         $this->assertSame("Bilbo", $customerFromDB->first_name);
+    }
+
+    public function testRelationship()
+    {
+        // create a customer in the DB
+        Customer::create([
+            "first_name" => "Bilbo",
+            "last_name" => "Baggins",
+            "email" => "email@fun.com",
+        ]);
+
+        $customerId = Customer::all()->first()->id;
+
+        Order::create([
+            "customer_id" => $customerId, // associate customer in DB with order
+            "delivery_postcode" => "BS1 5DP",
+            "order_description" => "2 barrels of wine",
+            "price" => 1.99,
+        ]);
+
+        $price = Customer::all()->first()->orders->first()->price; 
+        
+        $this->assertSame(1.99, $price);
+        
     }
 }
