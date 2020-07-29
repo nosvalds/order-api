@@ -88,6 +88,13 @@ Use the same request format as `POST /order`.
 - order_description - str
 - price - float
 
+
+### Next steps
+- Update store controller to use elloqent to associate order/customer rather than using the ID
+- Create Response class to format the reponse correctly, tests for this as well
+- PUT route
+- GET route
+
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
 <p align="center">

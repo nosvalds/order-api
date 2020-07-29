@@ -17,3 +17,15 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// orders
+Route::group(["prefix" => "/orders"], function () {
+    // POST /orders create an order
+    Route::post('/','API\Orders@store');
+    
+    // PUT /orders/:id - update an order
+    Route::put('/{owner}','API\Orders@update');
+    
+    // GET /orders/:id - return a single order information
+    Route::get('/{order}','API\Orders@show');
+});
