@@ -42,7 +42,8 @@ The files are located at:
 ## API Documentation
 
 ### Base URL
-`https://ordersapi.test/api/`
+Heroku Deployment:
+`https://radiant-hollows-80046.herokuapp.com/api/`
 
 ### Orders
 
