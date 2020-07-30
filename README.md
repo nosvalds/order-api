@@ -15,8 +15,29 @@
     - Update this order
     - Read this order - returning the response in JSON
 
-## Set Up Instructions (running locally)
+## Set Up Instructions (running locally with Homestead Vagrant VM)
 
+1. Clone this repo and `cd` into directory
+2. In your new directory, run `composer install`
+3. Run `vendor/bin/homestead make`
+4. Copy the `.env.example` file to a new `.env` file:
+`cp .env.example .env`
+5. Update the db, username and password your `.env` file
+6. Run `vagrant up`
+7. Login to the virtual machine: `vagrant ssh`
+8. Navigate to new `code` folder: `cd code`
+9. Generate a new artisan key: `art key:generate`
+10. Run the database migration: `art migrate`
+
+Visit `http://homestead.test` on Mac or `http://localhost:8000` on Windows
+
+## Testing
+
+There is a series of Unit Tests that can be run on the Vagrant machine:
+`art test --testsuite Unit`
+
+The files are located at:
+`tests/Unit/`
 
 ## API Documentation
 
@@ -93,7 +114,7 @@ Use the same request format as `POST /order`.
 - [x] Update store controller to use elloqent to associate order/customer rather than using the ID
 - [x] Create Response class to format the reponse correctly, tests for this as well
 - [x] Check for existing customer and don't create duplicate if one already exists
-  - [ ] BUG - 
+  - [x] BUG - 
             "message": "Call to undefined method Illuminate\\Database\\Eloquent\\Builder::orders()",
                 "exception": "BadMethodCallException",
                 "file": "/home/vagrant/code/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php",
