@@ -67,7 +67,7 @@ class CustomerTest extends TestCase
 
         $price = Customer::all()->first()->orders->first()->price; 
         
-        $this->assertSame(1.99, $price);
+        $this->assertSame('1.99', $price);
         
     }
 }

@@ -67,10 +67,10 @@ class OrderTest extends TestCase
         $this->assertSame("BS1 5DP", $orderFromDB->delivery_postcode);
 
         // check the price matches
-        $this->assertSame(1.99, $orderFromDB->price);
+        $this->assertSame('1.99', $orderFromDB->price);
 
         // check the customer id matches
-        $this->assertSame($customerId, $orderFromDB->customer_id);
+        $this->assertSame( +$customerId, +$orderFromDB->customer_id);
     }
 
     public function testCustomerRelationship()

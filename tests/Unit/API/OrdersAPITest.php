@@ -39,7 +39,7 @@ class OrdersAPITest extends TestCase
 
         // check that the order has been added to the database
         $order = Order::all()->first();
-        $this->assertSame(1.99, $order->price);        
+        $this->assertSame('1.99', $order->price);        
     }
 
     public function testPostDuplicateCustomer()
@@ -107,7 +107,7 @@ class OrdersAPITest extends TestCase
         $this->assertSame("Bilbo", $response->customer->first_name);
 
         // check we get back the price we created in setup
-        $this->assertSame(1.99, $response->price);
+        $this->assertSame('1.99', $response->price);
     }
 
     public function testPUTorder()
@@ -150,7 +150,7 @@ class OrdersAPITest extends TestCase
         $orderFromDB = Order::all()->first();
 
         // check the price matches
-        $this->assertSame(2.99, $orderFromDB->price);
+        $this->assertSame('2.99', $orderFromDB->price);
 
         // check the description matches
         $this->assertSame("3 casks of wine", $orderFromDB->order_description);
