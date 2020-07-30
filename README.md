@@ -98,7 +98,7 @@ Use the same request format as `POST /order`.
                 "exception": "BadMethodCallException",
                 "file": "/home/vagrant/code/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php",
                 "line": 50,
-- [x] PUT route - in progress
+- [x] PUT route
 - [x] GET route
 
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
